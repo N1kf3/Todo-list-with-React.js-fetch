@@ -23,10 +23,12 @@ body{
 .lista{
     border: 1px solid black;
 }
+
 .entrada-list, .boton{
     border: none;
     background-color: transparent;
 }
+
 .entrada-list:focus{
     outline: none;
 }
@@ -51,6 +53,10 @@ ul{
 
 .bordeesp2{
     border: 1px solid black;
+}
+
+.boton{
+    font-size: 1rem;
 }
 
 .paddinglista{
