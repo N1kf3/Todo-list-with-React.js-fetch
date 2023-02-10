@@ -5,6 +5,7 @@ import React ,{useState, useEffect} from "react";
 const List = () => {
     const [inputValue, setInputValue ] =useState('');
     const [itemsLista , setItemLista] = useState([]);
+    const [botonHabilitado , setBotonHabilitado] = useState(false)
 
     const crearUsuario = async ()=>{
         try{
@@ -58,6 +59,7 @@ const List = () => {
                 if (cargaExitosa){                    
                     await addUserOfList();      
                     setInputValue("");  
+                    setBotonHabilitado(false);
                 }                               
             } else if((inputValue == "") && (keyPressed == "Enter") || (e.target.id ==="button" && inputValue == "") )alert("Escribir item en la lista");  
     };
@@ -97,6 +99,7 @@ const List = () => {
                 body:JSON.stringify([])
             })
             setItemLista([]);
+            
             }
             await crearUsuario();
             setItemLista([]);
@@ -116,9 +119,10 @@ const List = () => {
             setInputValue("");  
         }   
     }
-
-    const deleteAllItems= ()=>{
-        updateUserListDelete(0);
+    const deleteAllItems= (e)=>{
+        updateUserListDelete(0);   
+        setBotonHabilitado(true);
+        
     }
 
 
@@ -131,7 +135,7 @@ const List = () => {
             <div className="d-flex">
                 <input className="entrada-list bordeesp paddinglista w-50" type="text" onChange={e => setInputValue(e.target.value)} value={inputValue} onKeyDown={addItemToList} placeholder="What needs to be done?"/>
                 <button className="boton bordeesp  w-25 " id="button" onClick={addItemToList}>Add a new item.</button>
-                <button className="boton bordeesp2  w-25 " id="button" onClick={deleteAllItems}>Delete all items.</button>
+                <button disabled = {botonHabilitado} className="boton bordeesp2  w-25 " id="button" onClick={deleteAllItems}> Delete all items.</button>
             </div>            
             <ul >{itemsLista.map((item,index) => <li className="bordeinf paddinglista d-flex justify-content-between " key={index} id={index}>{item.label} 
             <span onClick={(e)=>{
