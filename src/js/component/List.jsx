@@ -91,16 +91,16 @@ const List = () => {
             try{
                 const responseGet = await fetch(`https://assets.breatheco.de/apis/fake/todos/user/WilAnd`);
                 if (responseGet.status == 200){
-                const response = await fetch(`https://assets.breatheco.de/apis/fake/todos/user/WilAnd`,{
-                method: "DELETE",
-                headers:{
-                    'Content-Type': 'application/json'
-                },
-                body:JSON.stringify([])
-            })
-            setItemLista([]);
-            
-            }
+                    const response = await fetch(`https://assets.breatheco.de/apis/fake/todos/user/WilAnd`,{
+                    method: "DELETE",
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    body:JSON.stringify([])
+                    })
+                    setItemLista([]);
+                    setBotonHabilitado(true);            
+                }
             await crearUsuario();
             setItemLista([]);
             }
