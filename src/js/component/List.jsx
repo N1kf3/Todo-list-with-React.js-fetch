@@ -52,21 +52,22 @@ const List = () => {
 
 
     const addItemToList = async (e) => {
-        let keyPressed = e.key;       
+        let keyPressed = e.key;
+            if (inputValue.trim().length >= 1){
             if(((inputValue !== "") && (keyPressed == "Enter") || (e.target.id ==="button" && inputValue !== "") ))
-            {            
+            {                     
                 const cargaExitosa = await updateUserList({label: inputValue, done:false});
-                if (cargaExitosa){                    
+                if (cargaExitosa){                 
                     await addUserOfList();      
                     setInputValue("");  
                     setBotonHabilitado(false);
                 }                               
             } else if((inputValue == "") && (keyPressed == "Enter") || (e.target.id ==="button" && inputValue == "") )alert("Escribir item en la lista");  
-    };
+}};
 
     const updateUserListDelete = async(idAEliminar)=>{
         
-        if (itemsLista.length > 1){
+        if ((itemsLista.length > 1) &&(idAEliminar >=0) ){
             try{
                 const response = await fetch(`https://assets.breatheco.de/apis/fake/todos/user/WilAnd`,{
                     method: "PUT",
@@ -120,7 +121,7 @@ const List = () => {
         }   
     }
     const deleteAllItems= (e)=>{
-        updateUserListDelete(0);   
+        updateUserListDelete();   
         setBotonHabilitado(true);
         
     }
